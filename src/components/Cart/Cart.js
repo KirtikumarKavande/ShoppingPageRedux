@@ -5,15 +5,18 @@ import CartItem from "./CartItem";
 
 const Cart = (props) => {
   const cartStatus = useSelector((state) => state.cart.isShow);
+  const itemsAddedInCart = useSelector((state) => state.cart.cartItems);
   return (
     <>
       {cartStatus && (
         <Card className={classes.cart}>
           <h2>Your Shopping Cart</h2>
           <ul>
-            <CartItem
-              item={{ title: "Test Item", quantity: 3, total: 18, price: 6 }}
-            />
+            {itemsAddedInCart.map((newItem) => (
+              <CartItem
+                item={{ title: newItem.title, quantity: newItem.quantity, total: newItem.quantity*newItem.price,id:newItem.id  }}
+              />
+            ))}
           </ul>
         </Card>
       )}
