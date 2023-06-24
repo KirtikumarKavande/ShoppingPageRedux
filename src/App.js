@@ -12,14 +12,17 @@ function App() {
   const cartItemsData = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
   const notification = useSelector((state) => state.ui.notification);
+  const changed = useSelector((state) => state.cart.changed);
 
   useEffect(() => {
     if (isInitial) {
       isInitial = false;
       return;
     }
-    dispatch(sendCartData(cartItemsData));
-  }, [cartItemsData, dispatch]);
+    if (changed) {
+      dispatch(sendCartData(cartItemsData));
+    }
+  }, [cartItemsData, dispatch, changed]);
 
   useEffect(() => {
     dispatch(FetchData());

@@ -50,7 +50,7 @@ export const FetchData = () => {
       (res) => {
         res.json().then((data) => {
           console.log(data);
-          dispatch(fetchDataFromDB(data))
+          dispatch(fetchDataFromDB(data ||[]))
         });
       }
     );

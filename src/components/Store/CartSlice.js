@@ -2,7 +2,7 @@ import { uiActions } from "./notificationSlice";
 
 const { createSlice } = require("@reduxjs/toolkit");
 
-const cartIntialState = { isShow: false, cartItems: [] };
+const cartIntialState = { isShow: false, cartItems: [], changed: false };
 const cartSlice = createSlice({
   name: "cart",
   initialState: cartIntialState,
@@ -11,6 +11,7 @@ const cartSlice = createSlice({
       state.isShow = !state.isShow;
     },
     addItemToCart(state, action) {
+      state.changed = true;
       let existingObj = state.cartItems.find(
         (item) => item.id === action.payload.id
       );
@@ -24,6 +25,7 @@ const cartSlice = createSlice({
       state.cartItems = action.payload;
     },
     removeItemFromCart(state, action) {
+      state.changed = true;
       if (action.payload.quantity === 1) {
         const updatedArray = state.cartItems.filter((item) => {
           return item.id !== action.payload.id;
