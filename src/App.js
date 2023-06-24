@@ -3,9 +3,8 @@ import Cart from "./components/Cart/Cart";
 import Layout from "./components/Layout/Layout";
 import Products from "./components/Shop/Products";
 import { useDispatch, useSelector } from "react-redux";
-import { uiActions } from "./components/Store/notificationSlice";
 import Notification from "./components/UI/Notification";
-import { sendCartData } from "./components/Store/CartSlice";
+import { FetchData, sendCartData } from "./components/Store/actionCreator";
 
 let isInitial = true;
 
@@ -21,6 +20,10 @@ function App() {
     }
     dispatch(sendCartData(cartItemsData));
   }, [cartItemsData, dispatch]);
+
+  useEffect(() => {
+    dispatch(FetchData());
+  }, []);
 
   return (
     <>
